@@ -1,0 +1,382 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "title":"Lightning.io",
+        "description":"Electronics components api, faster than lightning.",
+        "version":"1.0.0"
+    },
+    "paths":{
+        "/api/v1/auth/signup":{
+            "post":{
+                "tags":["Authenticacion"],
+                "summary":"Ruta de autenticacion para la creacion y registro de un usuario.",
+                "description":"En esta ruta podras crear un usuario sin verificar, se proveera de un avatara por defecto, el cual podras cambiar una vez sea verifiado el correo de registro, para poder verificar tu cuenta deberas checkear tu correo y verificarlo o tomar el token y usarlo en la ruta de verificacion. Esta ruta recibe informacion basica de un usuario, principalmente su correo, contraseña y nombre de usuario.",
+                "requestBody":{
+                    "description":"Informacion basica de un usuario",
+                    "required":true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "title":"body",
+                                "description":"info basica del body",
+                                "type":"object",
+                                "properties":{
+                                    "username":{
+                                        "type":"string",
+                                        "example":"Sirius"
+                                    },
+                                    "mail":{
+                                        "type":"string",
+                                        "example":"thejosuescript@gmail.com"
+                                    },
+                                    "password":{
+                                        "type":"string",
+                                        "example":"12345pass"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "201":{
+                        "title":"created",
+                        "description":"created"
+                    },
+                    "409":{
+                        "title":"conflict",
+                        "description":"conflict",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "name":{
+                                            "type":"string",
+                                            "example":"SequelizeUniqueConstraintError"
+                                        },
+                                        "message":{
+                                            "type":"string",
+                                            "example":"Validation error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "title":"Validation error",
+                        "description":"Validation error",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"You need to provide a username field"
+                                        },
+                                        "errorName":{
+                                            "type":"string",
+                                            "example":"Validation error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/signin":{
+            "post":{
+                "tags":["Authenticacion"],
+                "summary":"Ruta de autenticacion para obtener un token de acceso.",
+                "description":"En esta ruta podras obtener un jwt (token de acceso) para poder acceder a las demas rutas, debes presentar tus credenciales (mail y password) en el body para recibirlo, en caso de que tus credencial sean erroneas, recibiras un mensaje especificando el error.",
+                "requestBody":{
+                    "required":true,
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "title":"body",
+                                "description":"info basica del body",
+                                "type":"object",
+                                "properties":{
+                                    "mail":{
+                                        "type":"string",
+                                        "example":"thejosuescript@gmail.com"
+                                    },
+                                    "password":{
+                                        "type":"string",
+                                        "example":"12345pass"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "token":{
+                                            "type":"string",
+                                            "example":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Bad request",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"You need to provide a mail field"
+                                        },
+                                        "errorName":{
+                                            "type":"string",
+                                            "example":"Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "name":{
+                                            "type":"string",
+                                            "example":"Auth error"
+                                        },
+                                        "message":{
+                                            "type":"string",
+                                            "example":"Invalid password, verify your password for this account"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/verify":{
+            "post":{
+                "tags":["Authenticacion"],
+                "summary":"Ruta de verificacion de usuarios.",
+                "description":"En esta ruta podras verificar un usuario con el token que fue enviado al correo de dicho usuario cuando fue creado, recibe el token en una query llamada token para verifica al usuario y tener acceso a las demas rutas protegidas.",
+                "parameters":[
+                    {
+                        "name":"token",
+                        "description":"Token de verificacion",
+                        "in":"query",
+                        "required":true
+                    }
+                ],
+                "responses":{
+                    "401":{
+                        "description":"Unauthorized",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"Invalid token, incorrect verification token"
+                                        },
+                                        "name":{
+                                            "type":"string",
+                                            "example":"Verification error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "verified":{
+                                            "type":"boolean",
+                                            "example":true
+                                        },
+                                        "message":{
+                                            "type":"string",
+                                            "example":"Sirius, your account is verified, welcome to Lightning.io"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Bad request",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"You need to provide a token query"
+                                        },
+                                        "errorName":{
+                                            "type":"string",
+                                            "example":"Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me":{
+            "get":{
+                "tags":["Me/users"],
+                "summary":"Ruta para traer la informacion de un usuario.",
+                "description":"En esta ruta podras ver tu informacion basica, para ello tienes que usar un token en los headers, con este header de autenticacion podras tener acceso.",
+                "parameters":[
+                    {
+                        "name":"token",
+                        "in":"header",
+                        "description":"Token de autenticacion",
+                        "required":true,
+                        "example":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"Ok",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "id":{
+                                            "type":"string",
+                                            "example":"a43e12b5-b214-41a8-91ab-5d924db0c8f5"
+                                        },
+                                        "username":{
+                                            "type":"string",
+                                            "example":"Sirius"
+                                        },
+                                        "mail":{
+                                            "type":"string",
+                                            "example":"thejosuescript@gmail.com"
+                                        },
+                                        "avatar":{
+                                            "type":"string",
+                                            "example":"avatar.svg"
+                                        },
+                                        "role":{
+                                            "type":"string",
+                                            "example":"User"
+                                        },
+                                        "verified":{
+                                            "type":"boolean",
+                                            "example":true
+                                        },
+                                        "createdAt":{
+                                            "type":"string",
+                                            "example":"2023-04-09T20:26:10.003Z"
+                                        },
+                                        "updatedAt":{
+                                            "type":"string",
+                                            "example":"2023-04-09T20:26:10.003Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description":"Unauthorized",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"Conflict, we can't find any user for you, check your token"
+                                        },
+                                        "errorName":{
+                                            "type":"string",
+                                            "example":"Auth error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404":{
+                        "description":"Bad request",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "properties":{
+                                        "message":{
+                                            "type":"string",
+                                            "example":"You need to provide token header"
+                                        },
+                                        "errorName":{
+                                            "type":"string",
+                                            "example":"Validation error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/avatar/{file}":{
+            "get":{
+                "tags":["Me/users"],
+                "summary":"Ruta para obtener tu avatar.",
+                "description":"En esta ruta prodras obtener tu imagene svg, necesitaras pasar el nombre de tu avatar como parametro en la ruta, este nombre debera ya de incluir la extension de la imagen, recibiras directamente tu avatar como respuesta.",
+                "parameters":[
+                    {
+                        "name":"file",
+                        "in":"path",
+                        "required":true,
+                        "example":"avatar.png"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "content":{
+                            "image/png":{
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
