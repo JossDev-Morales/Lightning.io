@@ -7,6 +7,7 @@ const db= new Sequelize({
     username:process.env.DB_USER,
     password:process.env.DB_PASSWORD,
     dialect:'postgres',
-    logging:false
+    logging:false,
+    dialectOptions:{ssl:{required:true,rejectUnauthorized:false}}
 })
 module.exports=db
