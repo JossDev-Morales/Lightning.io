@@ -1,84 +1,86 @@
 {
-    "openapi":"3.0.0",
-    "info":{
-        "title":"Lightning.io",
-        "description":"Electronics components api, faster than lightning.",
-        "version":"1.0.0"
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Lightning.io",
+        "description": "Electronics components api, faster than lightning.",
+        "version": "1.0.0"
     },
-    "paths":{
-        "/api/v1/auth/signup":{
-            "post":{
-                "tags":["Authenticacion"],
-                "summary":"Ruta de autenticacion para la creacion y registro de un usuario.",
-                "description":"En esta ruta podras crear un usuario sin verificar, se proveera de un avatara por defecto, el cual podras cambiar una vez sea verifiado el correo de registro, para poder verificar tu cuenta deberas checkear tu correo y verificarlo o tomar el token y usarlo en la ruta de verificacion. Esta ruta recibe informacion basica de un usuario, principalmente su correo, contraseña y nombre de usuario.",
-                "requestBody":{
-                    "description":"Informacion basica de un usuario",
-                    "required":true,
-                    "content":{
-                        "application/json":{
-                            "schema":{
-                                "title":"body",
-                                "description":"info basica del body",
-                                "type":"object",
-                                "properties":{
-                                    "username":{
-                                        "type":"string",
-                                        "example":"Sirius"
+    "paths": {
+        "/api/v1/auth/signup": {
+            "post": {
+                "tags": [
+                    "Authenticacion"
+                ],
+                "summary": "Ruta de autenticacion para la creacion y registro de un usuario.",
+                "description": "En esta ruta podras crear un usuario sin verificar, se proveera de un avatara por defecto, el cual podras cambiar una vez sea verifiado el correo de registro, para poder verificar tu cuenta deberas checkear tu correo y verificarlo o tomar el token y usarlo en la ruta de verificacion. Esta ruta recibe informacion basica de un usuario, principalmente su correo, contraseña y nombre de usuario.",
+                "requestBody": {
+                    "description": "Informacion basica de un usuario",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "body",
+                                "description": "info basica del body",
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "Sirius"
                                     },
-                                    "mail":{
-                                        "type":"string",
-                                        "example":"thejosuescript@gmail.com"
+                                    "mail": {
+                                        "type": "string",
+                                        "example": "thejosuescript@gmail.com"
                                     },
-                                    "password":{
-                                        "type":"string",
-                                        "example":"12345pass"
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345pass"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "responses":{
-                    "201":{
-                        "title":"created",
-                        "description":"created"
+                "responses": {
+                    "201": {
+                        "title": "created",
+                        "description": "created"
                     },
-                    "409":{
-                        "title":"conflict",
-                        "description":"conflict",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "name":{
-                                            "type":"string",
-                                            "example":"SequelizeUniqueConstraintError"
+                    "409": {
+                        "title": "conflict",
+                        "description": "conflict",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "SequelizeUniqueConstraintError"
                                         },
-                                        "message":{
-                                            "type":"string",
-                                            "example":"Validation error"
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation error"
                                         }
                                     }
                                 }
                             }
                         }
                     },
-                    "400":{
-                        "title":"Validation error",
-                        "description":"Validation error",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "message":{
-                                            "type":"string",
-                                            "example":"You need to provide a username field"
+                    "400": {
+                        "title": "Validation error",
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a username field"
                                         },
-                                        "errorName":{
-                                            "type":"string",
-                                            "example":"Validation error"
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error"
                                         }
                                     }
                                 }
@@ -88,84 +90,86 @@
                 }
             }
         },
-        "/api/v1/auth/signin":{
-            "post":{
-                "tags":["Authenticacion"],
-                "summary":"Ruta de autenticacion para obtener un token de acceso.",
-                "description":"En esta ruta podras obtener un jwt (token de acceso) para poder acceder a las demas rutas, debes presentar tus credenciales (mail y password) en el body para recibirlo, en caso de que tus credencial sean erroneas, recibiras un mensaje especificando el error.",
-                "requestBody":{
-                    "required":true,
-                    "content":{
-                        "application/json":{
-                            "schema":{
-                                "title":"body",
-                                "description":"info basica del body",
-                                "type":"object",
-                                "properties":{
-                                    "mail":{
-                                        "type":"string",
-                                        "example":"thejosuescript@gmail.com"
+        "/api/v1/auth/signin": {
+            "post": {
+                "tags": [
+                    "Authenticacion"
+                ],
+                "summary": "Ruta de autenticacion para obtener un token de acceso.",
+                "description": "En esta ruta podras obtener un jwt (token de acceso) para poder acceder a las demas rutas, debes presentar tus credenciales (mail y password) en el body para recibirlo, en caso de que tus credencial sean erroneas, recibiras un mensaje especificando el error.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "body",
+                                "description": "info basica del body",
+                                "type": "object",
+                                "properties": {
+                                    "mail": {
+                                        "type": "string",
+                                        "example": "thejosuescript@gmail.com"
                                     },
-                                    "password":{
-                                        "type":"string",
-                                        "example":"12345pass"
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345pass"
                                     }
                                 }
                             }
                         }
                     }
                 },
-                "responses":{
-                    "200":{
-                        "description":"Ok",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "token":{
-                                            "type":"string",
-                                            "example":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
                                         }
                                     }
                                 }
                             }
                         }
                     },
-                    "400":{
-                        "description":"Bad request",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "message":{
-                                            "type":"string",
-                                            "example":"You need to provide a mail field"
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a mail field"
                                         },
-                                        "errorName":{
-                                            "type":"string",
-                                            "example":"Validation error."
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
                                         }
                                     }
                                 }
                             }
                         }
                     },
-                    "401":{
-                        "description":"Unauthorized",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "name":{
-                                            "type":"string",
-                                            "example":"Auth error"
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Auth error"
                                         },
-                                        "message":{
-                                            "type":"string",
-                                            "example":"Invalid password, verify your password for this account"
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid password, verify your password for this account"
                                         }
                                     }
                                 }
@@ -175,74 +179,1778 @@
                 }
             }
         },
-        "/api/v1/auth/verify":{
+        "/api/v1/auth/verify": {
+            "post": {
+                "tags": [
+                    "Authenticacion"
+                ],
+                "summary": "Ruta de verificacion de usuarios.",
+                "description": "En esta ruta podras verificar un usuario con el token que fue enviado al correo de dicho usuario cuando fue creado, recibe el token en una query llamada token para verifica al usuario y tener acceso a las demas rutas protegidas.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "description": "Token de verificacion",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid token, incorrect verification token"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Verification error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "verified": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sirius, your account is verified, welcome to Lightning.io"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a token query"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me": {
+            "get": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta para traer la informacion de un usuario.",
+                "description": "En esta ruta podras ver tu informacion basica, para ello tienes que usar un token en los headers, con este header de autenticacion podras tener acceso.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "a43e12b5-b214-41a8-91ab-5d924db0c8f5"
+                                        },
+                                        "username": {
+                                            "type": "string",
+                                            "example": "Sirius"
+                                        },
+                                        "mail": {
+                                            "type": "string",
+                                            "example": "thejosuescript@gmail.com"
+                                        },
+                                        "avatar": {
+                                            "type": "string",
+                                            "example": "avatar.svg"
+                                        },
+                                        "role": {
+                                            "type": "string",
+                                            "example": "User"
+                                        },
+                                        "verified": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "example": "2023-04-09T20:26:10.003Z"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "example": "2023-04-09T20:26:10.003Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Conflict, we can't find any user for you, check your token"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Auth error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta para eliminar un usuario y todo lo asociado a el (Peticion necesaria).",
+                "description": "En esta ruta podras eliminar un usuario con una peticion, tienes que presentar un token de acceso en los headers y el token de la peticion creada en una query, necesitaras ser propietario de la cuenta o tener un rol superior al de la cuenta a eliminar, es decir si eres el dueño de la cuenta podras eliminarla, por otro lado si eres Admin puedes eliminar cuentas de usuarios sin rol superior, pero no cuentas con roles de Admin, las cuentas con rol Admin solo podran ser eliminadas por el Project Manager.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "description": "Token de peticion",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a valid token query"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You can't delete this user because it doesn't belong to you or you dont have permissions."
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Auth error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/avatar/{file}": {
+            "get": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta para obtener tu avatar.",
+                "description": "En esta ruta prodras obtener tu imagene svg, necesitaras pasar el nombre de tu avatar como parametro en la ruta, este nombre debera ya de incluir la extension de la imagen, recibiras directamente tu avatar como respuesta.",
+                "parameters": [
+                    {
+                        "name": "file",
+                        "in": "path",
+                        "required": true,
+                        "example": "avatar.png"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "image/png": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "conflict",
+                                    "description": "ENOENT",
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "ENOENT: no such file or directory, stat 'path'"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Errror"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "ENOENT"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/avatar": {
+            "put": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta para actualizar tu avatar con una imagen.",
+                "description": "En esta ruta podras subir una imagen, maximo 1, la cual se usara para actualizar tu avatar, esta debera ser envida en form-data como 'avatar' para su correcto envio, ademas de esto necesitaras enviar un token de acceso.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Form data",
+                    "required": false,
+                    "content": {
+                        "multipart/form-data": {}
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "500": {
+                        "description": "Internal error | no image provided",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Cannot destructure property 'filename' of 'req.file' as it is undefined."
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "TypeError"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/password": {
+            "put": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta para actualizar tu contraseña.",
+                "description": "En esta ruta podras cambiar tu contraseña, para ello tienes que presentar un token de acceso en los headers y en el body tu contraseña actual seguido de tu nueva contraseña.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Contraseñas",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345pass"
+                                    },
+                                    "newPassword": {
+                                        "type": "string",
+                                        "example": "myNewPassword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a password field"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/mail": {
+            "put": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta para actualizar tu mail.",
+                "description": "En esta ruta podras cambiar tu mail, para ello tienes que presentar un token de acceso en los headers y en el body tu contraseña seguido de tu nuevo correo, este nuevo correo tendra que ser verificado para poder usar tu cuenta nuevamente.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "Contraseña y nuevo mail",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "example": "myNewPassword"
+                                    },
+                                    "newMail": {
+                                        "type": "string",
+                                        "example": "thejosuescript@gmail.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Next time you will need to verify your email"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a password field"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/username": {
+            "put": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta para cambiar tu username.",
+                "description": "En esta ruta podras cambiar tu username, para ello necesitas usar un token de acceso en los headers y en el body tu nuevo username.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "New username",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "Lightning"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a username field"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/petition": {
+            "delete": {
+                "tags": [
+                    "Me/users"
+                ],
+                "summary": "Ruta de peticiones para eliminar un usuario.",
+                "description": "En esta ruta podras inicializar una peticion para eliminar un usuario, necesitas presentar un token de acceso y tu contraseña, una vez validado que la contraseña sea correcta, se enviara un email al correo del usuario para confirmar la accion, cuando la accion sea confirmada se ejecutara un llamado a una ruta para eliminar el usuario, este proceso puede ser manual si obtienes el token en el correo.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "description": "password",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string",
+                                        "example": "myNewPassword"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a password field"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/products": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para crear un nuevo producto.",
+                "description": "En esta ruta podras crear products, proporcionando un token de acceso en los headers y la informacion basica de un producto, te respondera con el id del producto creado que te servira para subir imagenes del producto.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "requestBody": {
+                    "description": "Informacion basica de un producto",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "AMD Athlon 3000G"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Procesador AMD multinucleo con grafica Radeon integrada."
+                                    },
+                                    "price": {
+                                        "type": "numeric",
+                                        "example": 1700
+                                    },
+                                    "availableQty": {
+                                        "type": "integer",
+                                        "example": 60
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "7520097b-32ff-4511-8579-10f866856a62"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a name field"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para obtener todos los productos creados por un usuario.",
+                "description": "En esta ruta podras traer la informacion de todos los productos creados por un usuario, para ello necesitas un token de acceso.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "example": {
+                                            "id": "7520097b-32ff-4511-8579-10f866856a62",
+                                            "name": "AMD Athlon 3000G",
+                                            "description": "Procesador AMD multinucleo con grafica Radeon integrada.",
+                                            "price": 1700,
+                                            "availableQty": 60,
+                                            "soldOut": false,
+                                            "userId": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53",
+                                            "createdAt": "2023-04-10T20:23:48.772Z",
+                                            "product_images": [],
+                                            "user": {
+                                                "username": "Lightning",
+                                                "id": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/products/{id}/images": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para subir imagenes de un producto.",
+                "description": "En esta ruta podras subir imagenes para un producto, necesitaras proporcionar un token de acceso y el id del producto en la ruta, podras suir hasta un maximo de 4 imagenes, con el nombre de images.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "example": "7520097b-32ff-4511-8579-10f866856a62"
+                    }
+                ],
+                "requestBody": {
+                    "description": "4 imagenes con el nombre images",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "example": "images"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "example": {
+                                            "id": "e5ad5d05-ff52-4a4a-81a1-6f1c1ccb5e1e",
+                                            "productId": "400dd97b-9ebc-4e55-851b-e2128d70c7de",
+                                            "name": "238f93f0-d7e8-11ed-8e80-95c32eef5158.jpg"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This product does not belong to you, you can't update this product"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Auth error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a valid token"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/products/{id}": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para actualizar la inforamcion de un producto",
+                "description": "En esta ruta podras actualizar la informacion de un producto que te pertenezca, necesitar prensentar un token de acceso y la informacion a a ctualizar en el body, puedes usar este endpoint para aumentar la cantidad dispoible (stock) del producto con un query llamado quantity, es opcional y en caso de mandar la cantidad, esta debe ser un entero, esta se sumara a la cantidad disponible.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del producto",
+                        "example": "400dd97b-9ebc-4e55-851b-e2128d70c7de"
+                    },
+                    {
+                        "name": "quantity",
+                        "in": "query",
+                        "description": "Cantidad a aumentar el stock",
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "Informacion basica de un producto",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "AMD Athlon 3000G"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Procesador AMD multinucleo con grafica Radeon integrada."
+                                    },
+                                    "price": {
+                                        "type": "numeric",
+                                        "example": 1700
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This product does not belong to you, you can't update this product"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para eliminar un producto.",
+                "description": "En esta ruta podras eliminar un producto, necesitaras presentar un token de acceso y el id del producto a eliminar en un parametro de ruta llamado id.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "example": "7520097b-32ff-4511-8579-10f866856a62"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This product does not belong to you, you can't update this product"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products/{id}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para traer la informacion completa de un producto en especifico.",
+                "description": "En esta ruta podras traer la informacion de un producto, tendras que presentar un token de acceso y un parametro de ruta con el id del producto.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id del producto",
+                        "example": "400dd97b-9ebc-4e55-851b-e2128d70c7de"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "id": "400dd97b-9ebc-4e55-851b-e2128d70c7de",
+                                        "name": "AMD Athlon 3000G",
+                                        "description": "Procesador AMD multinucleo con grafica Radeon integrada.",
+                                        "price": 1700,
+                                        "availableQty": -1,
+                                        "soldOut": false,
+                                        "userId": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53",
+                                        "createdAt": "2023-04-05T02:13:47.904Z",
+                                        "product_images": [
+                                            {
+                                                "id": "e5ad5d05-ff52-4a4a-81a1-6f1c1ccb5e1e",
+                                                "name": "238f93f0-d7e8-11ed-8e80-95c32eef5158.jpg"
+                                            }
+                                        ],
+                                        "user": {
+                                            "username": "Lightning",
+                                            "id": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a valid token"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal error | no product found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "message": "this product dont exist",
+                                        "errorName": "Product error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para obtener todos los productos existentes.",
+                "description": "En esta ruta podras traer todos los products, tendras que presentar un toquen de acceso, podras filtrar la informacion por precio min y max ademas de poder filtrar por vendedor, para ello tendras que pasar los respectivos valores en query params, min, max y seller, este ultimo siendo el id del vendedor.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                    },
+                    {
+                        "name": "min",
+                        "in": "query",
+                        "description": "valor minimo del producto",
+                        "example": 499.99
+                    },
+                    {
+                        "name": "max",
+                        "in": "query",
+                        "description": "valor maximo del producto",
+                        "example": 3500
+                    },
+                    {
+                        "name": "seller",
+                        "in": "query",
+                        "description": "Id del vendedor",
+                        "example": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "example": {
+                                            "id": "7520097b-32ff-4511-8579-10f866856a62",
+                                            "name": "AMD Athlon 3000G",
+                                            "description": "Procesador AMD multinucleo con grafica Radeon integrada.",
+                                            "price": 1700,
+                                            "availableQty": 60,
+                                            "soldOut": false,
+                                            "userId": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53",
+                                            "createdAt": "2023-04-10T20:23:48.772Z",
+                                            "product_images": [],
+                                            "user": {
+                                                "username": "Lightning",
+                                                "id": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a valid token"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/products/images/{file}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Ruta para obtener una imagen de un producto.",
+                "description": "En esta ruta podras obtener una imagen de un producto, necesitaras presentar un token de acceso y el nombre de la imagen junto con la extension, el nombre de la imagen la podras conseguir obteniendo la informacion del producto, coloca el nombre en el parametro de la ruta llamado file.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI3YmY5MGVjLWFiNGItNGRjYy05N2JkLWFkYzFiZGIzMmM1MyIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJMaWdodG5pbmciLCJpYXQiOjE2ODExNjg4MjYsImV4cCI6MTY4MTI1NTIyNn0.1Pdf-tkh5PxUad4YpPvrI2OHJSk18iiC8Qshme7hEXo"
+                    },
+                    {
+                        "name": "file",
+                        "in": "path",
+                        "description": "Nombre de la imagen del producto",
+                        "required": true,
+                        "example": "238f93f0-d7e8-11ed-8e80-95c32eef5158.jpg"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "image/png": {}
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "title": "conflict",
+                                    "description": "ENOENT",
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "ENOENT: no such file or directory, stat 'path'"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Errror"
+                                        },
+                                        "code": {
+                                            "type": "string",
+                                            "example": "ENOENT"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/cart": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Ruta para obtener tu carrito y los productos en el.",
+                "description": "En esta ruta podras obtener toda la informacion de tu carrito incluyendo los productos en el, tienes que presentar un token de acceso.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI3YmY5MGVjLWFiNGItNGRjYy05N2JkLWFkYzFiZGIzMmM1MyIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJMaWdodG5pbmciLCJpYXQiOjE2ODExNjg4MjYsImV4cCI6MTY4MTI1NTIyNn0.1Pdf-tkh5PxUad4YpPvrI2OHJSk18iiC8Qshme7hEXo"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "id": "54bb39cb-3e3c-41cb-8e5a-169f274a47cc",
+                                        "userId": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53",
+                                        "totalPrice": 0,
+                                        "products": []
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide a valid token"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/cart/products": {
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Ruta para agregar un producto al carrito.",
+                "description": "En esta ruta podras agregar un producto al carrito, al agregar un producto, el precio total del carrito se vera afectado, para poder agregar un producto necesitara presentar un token de acceso en los headers, el id del producto y la cantidad a agregar, la cantidad del prdocuto en el carrito sera equivalente al prdocuto del carrito multiplicada por la cantidad de ellos.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI3YmY5MGVjLWFiNGItNGRjYy05N2JkLWFkYzFiZGIzMmM1MyIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJMaWdodG5pbmciLCJpYXQiOjE2ODExNjg4MjYsImV4cCI6MTY4MTI1NTIyNn0.1Pdf-tkh5PxUad4YpPvrI2OHJSk18iiC8Qshme7hEXo"
+                    }
+                ],
+                "requestBody": {
+                    "description": "informacion para agregar un producto",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "productId": "400dd97b-9ebc-4e55-851b-e2128d70c7de",
+                                    "quantity": 10
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "available": true,
+                                        "id": "545347da-e771-4016-95ce-350759c2894c",
+                                        "productId": "400dd97b-9ebc-4e55-851b-e2128d70c7de",
+                                        "cartId": "54bb39cb-3e3c-41cb-8e5a-169f274a47cc",
+                                        "quantity": 100,
+                                        "price": 170000
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Ruta para cambiar la cantidad de un producto en el carrito.",
+                "description": "En esta ruta podras cambiar la cantidad de un producto en el carrito, al cambiar la cantidad de un producto, el precio total del carrito se vera afectado, para poder cambiar la cantidad de un producto necesitara presentar un token de acceso en los headers, el id del producto en el carrito (relacion producto carrito) y la cantidad, la cantidad del prdocuto en el carrito sera equivalente al prdocuto del carrito multiplicada por la cantidad de ellos.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI3YmY5MGVjLWFiNGItNGRjYy05N2JkLWFkYzFiZGIzMmM1MyIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJMaWdodG5pbmciLCJpYXQiOjE2ODExNjg4MjYsImV4cCI6MTY4MTI1NTIyNn0.1Pdf-tkh5PxUad4YpPvrI2OHJSk18iiC8Qshme7hEXo"
+                    }
+                ],
+                "requestBody": {
+                    "description": "informacion para cambiar la cantidad de un producto",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "id": "545347da-e771-4016-95ce-350759c2894c",
+                                    "quantity": 5
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Ruta pa eliminar un producto del carrito.",
+                "description": "En esta ruta se puede eleminar un producto que este relacionado con tu carrito, para ello necesitaras autenticarte con un token de acceso y darnos el id de la relacion entre el producto y tu carrito, el precio total del carrito se vera afectado una vez el producto haya sido eliminado.",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI3YmY5MGVjLWFiNGItNGRjYy05N2JkLWFkYzFiZGIzMmM1MyIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJMaWdodG5pbmciLCJpYXQiOjE2ODExNjg4MjYsImV4cCI6MTY4MTI1NTIyNn0.1Pdf-tkh5PxUad4YpPvrI2OHJSk18iiC8Qshme7hEXo"
+                    }
+                ],
+                "requestBody": {
+                    "description": "id del producto a eliminar",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "id": "400dd97b-9ebc-4e55-851b-e2128d70c7de"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
+                                        },
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Id erroneo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "message": "No se encontro ningun producto en el carrito con este id, tiene que ser un id de relacion.",
+                                        "errorName": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/me/orders":{
             "post":{
-                "tags":["Authenticacion"],
-                "summary":"Ruta de verificacion de usuarios.",
-                "description":"En esta ruta podras verificar un usuario con el token que fue enviado al correo de dicho usuario cuando fue creado, recibe el token en una query llamada token para verifica al usuario y tener acceso a las demas rutas protegidas.",
+                "tags":["Orders"],
+                "summary":"Ruta para crear una orden de compra de tu carrito.",
+                "description":"Este endpoint recibe 3 parametros, Token de acceso, type y format, estos dos ultimos seran explicados mas adelante, el token de acceso permitira identificarte para poder generar una orden con tu carrito, pasara todos los datos de tu carrito a una orden de compra, te generara un metodo de págo con codigo qr que tendras que escanear para poder pagar, te redirigira a una pagina con tu token de pago, ese token de pago es el que se usa para verificar el pago de la orden, eso lo podras hacer en otro endpoint, ahora por otra parte, el parametro query llamado type, te permite decidir en que formato recibes el codigo qr, existen dos metodos, 'file' y 'data', el metodo file te creara una imagen y te retornara el nombre de la imagen qr en el servidor, podras usarla con la ruta para iamgenes qr, por defecto el formato es png a no ser que especifiques en el parametro query 'format' el formato svg, son los dos formatos existentes, si en el parametro 'type' usas data como valor, se te retornara una URLData que podras usar en una imagen, esta forma es mas rapida y no genera ninguna imagen en el servidor, es optima en rapidez y eficiencia, pero no sirve para casos donde necesites una imagen en el servidor, ya que el URLData no se guarda, se genera una vez y no puede recuperarse esa informacion. En caso de que un producto en tu carrito exceda el stock disponible del producto, este se regresara a tu carrito y se cambiara a no disponible, los productos en el carrito con el estado no dispoible, no entraran a la orden, puedes cambiar el estado de disponibilidad con un endpoint que verifica que productos siguen sin disponibilidad, o bien bajar la cantidad de este producto, esto tambien verifica la disponibilidad, asi si bajas la cantidad a un minimo disponible en el stock, volvera a estar disponible y podra entrar a una orden. Se notificara de la orden de compra por correo.",
                 "parameters":[
                     {
-                        "name":"token",
-                        "description":"Token de verificacion",
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI3YmY5MGVjLWFiNGItNGRjYy05N2JkLWFkYzFiZGIzMmM1MyIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJMaWdodG5pbmciLCJpYXQiOjE2ODExNjg4MjYsImV4cCI6MTY4MTI1NTIyNn0.1Pdf-tkh5PxUad4YpPvrI2OHJSk18iiC8Qshme7hEXo"
+                    },
+                    {
+                        "name":"type",
                         "in":"query",
-                        "required":true
+                        "description":"Tipo de QRcode a generar",
+                        "example":"file"
+                    },
+                    {
+                        "name":"format",
+                        "in":"query",
+                        "description":"Formato de imagen (type:file)",
+                        "example":"svg"
                     }
                 ],
                 "responses":{
-                    "401":{
-                        "description":"Unauthorized",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "message":{
-                                            "type":"string",
-                                            "example":"Invalid token, incorrect verification token"
-                                        },
-                                        "name":{
-                                            "type":"string",
-                                            "example":"Verification error"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
                     "200":{
                         "description":"Ok",
                         "content":{
                             "application/json":{
                                 "schema":{
                                     "type":"object",
-                                    "properties":{
-                                        "verified":{
-                                            "type":"boolean",
-                                            "example":true
+                                    "example":{
+                                        "errors": [],
+                                        "filename": "07b80b22-6757-432f-b7ac-b29a29845893.svg",
+                                        "message": "Scan this qr code to pay your order, this order expires in a month",
+                                        "instruction": "Use this filename to get a scannable image with the path for qr codes."
+                                      }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
                                         },
-                                        "message":{
-                                            "type":"string",
-                                            "example":"Sirius, your account is verified, welcome to Lightning.io"
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
                                         }
                                     }
                                 }
                             }
                         }
                     },
-                    "400":{
-                        "description":"Bad request",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "message":{
-                                            "type":"string",
-                                            "example":"You need to provide a token query"
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
                                         },
-                                        "errorName":{
-                                            "type":"string",
-                                            "example":"Validation error."
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
                                         }
                                     }
                                 }
@@ -252,18 +1960,24 @@
                 }
             }
         },
-        "/api/v1/me":{
-            "get":{
-                "tags":["Me/users"],
-                "summary":"Ruta para traer la informacion de un usuario.",
-                "description":"En esta ruta podras ver tu informacion basica, para ello tienes que usar un token en los headers, con este header de autenticacion podras tener acceso.",
+        "/api/v1/me/payments":{
+            "post":{
+                "tags":["Orders"],
+                "summary":"Ruta para pagar una orden.",
+                "description":"Este endpoint recibe un token de acceso y un query llamado token el cual debera ser un token generado en el metodo de pago de la orden, si ya no tienes acceso a el token de pago o su tiempo de expiracion ya paso (un mes), podras generar otro con el endpoint para refrescar tokens de pago, al concluir el pago, los productos de la oden seran restados de la cantidad de stock de respectivos productos.",
                 "parameters":[
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Token de autenticacion",
+                        "required": true,
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjI3YmY5MGVjLWFiNGItNGRjYy05N2JkLWFkYzFiZGIzMmM1MyIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJMaWdodG5pbmciLCJpYXQiOjE2ODExNjg4MjYsImV4cCI6MTY4MTI1NTIyNn0.1Pdf-tkh5PxUad4YpPvrI2OHJSk18iiC8Qshme7hEXo"
+                    },
                     {
                         "name":"token",
-                        "in":"header",
-                        "description":"Token de autenticacion",
+                        "in":"query",
                         "required":true,
-                        "example":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImE0M2UxMmI1LWIyMTQtNDFhOC05MWFiLTVkOTI0ZGIwYzhmNSIsInJvbGUiOiJVc2VyIiwidXNlcm5hbWUiOiJTaXJpdXMiLCJpYXQiOjE2ODEwNzc5NDYsImV4cCI6MTY4MTE2NDM0Nn0.Xrk0E2TQUF0nMR3iSsgWMIROaMqPvQdYY3gCNGtXI-c"
+                        "description":"Token de pago"
                     }
                 ],
                 "responses":{
@@ -273,105 +1987,58 @@
                             "application/json":{
                                 "schema":{
                                     "type":"object",
-                                    "properties":{
-                                        "id":{
-                                            "type":"string",
-                                            "example":"a43e12b5-b214-41a8-91ab-5d924db0c8f5"
+                                    "example":{
+                                        "message": "Succes, payment complete!",
+                                        "order": {
+                                          "id": "a7929a99-fa3f-4070-a92b-c7b07991d102",
+                                          "total": 3015000,
+                                          "userId": "27bf90ec-ab4b-4dcc-97bd-adc1bdb32c53",
+                                          "paid": true,
+                                          "createdAt": "2023-04-05T23:15:18.730Z",
+                                          "products": []
+                                        }
+                                      }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You need to provide token header"
                                         },
-                                        "username":{
-                                            "type":"string",
-                                            "example":"Sirius"
-                                        },
-                                        "mail":{
-                                            "type":"string",
-                                            "example":"thejosuescript@gmail.com"
-                                        },
-                                        "avatar":{
-                                            "type":"string",
-                                            "example":"avatar.svg"
-                                        },
-                                        "role":{
-                                            "type":"string",
-                                            "example":"User"
-                                        },
-                                        "verified":{
-                                            "type":"boolean",
-                                            "example":true
-                                        },
-                                        "createdAt":{
-                                            "type":"string",
-                                            "example":"2023-04-09T20:26:10.003Z"
-                                        },
-                                        "updatedAt":{
-                                            "type":"string",
-                                            "example":"2023-04-09T20:26:10.003Z"
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Validation error."
                                         }
                                     }
                                 }
                             }
                         }
                     },
-                    "401":{
-                        "description":"Unauthorized",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "message":{
-                                            "type":"string",
-                                            "example":"Conflict, we can't find any user for you, check your token"
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "This user dont exist"
                                         },
-                                        "errorName":{
-                                            "type":"string",
-                                            "example":"Auth error"
+                                        "errorName": {
+                                            "type": "string",
+                                            "example": "Acces denied"
                                         }
                                     }
                                 }
-                            }
-                        }
-                    },
-                    "404":{
-                        "description":"Bad request",
-                        "content":{
-                            "application/json":{
-                                "schema":{
-                                    "type":"object",
-                                    "properties":{
-                                        "message":{
-                                            "type":"string",
-                                            "example":"You need to provide token header"
-                                        },
-                                        "errorName":{
-                                            "type":"string",
-                                            "example":"Validation error"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/avatar/{file}":{
-            "get":{
-                "tags":["Me/users"],
-                "summary":"Ruta para obtener tu avatar.",
-                "description":"En esta ruta prodras obtener tu imagene svg, necesitaras pasar el nombre de tu avatar como parametro en la ruta, este nombre debera ya de incluir la extension de la imagen, recibiras directamente tu avatar como respuesta.",
-                "parameters":[
-                    {
-                        "name":"file",
-                        "in":"path",
-                        "required":true,
-                        "example":"avatar.png"
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "content":{
-                            "image/png":{
-
                             }
                         }
                     }

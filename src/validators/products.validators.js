@@ -63,11 +63,7 @@ const validatorUpImages=[
         .notEmpty()
         .withMessage('id can not be empty')
         .isUUID()
-        .withMessage('invlaid id, needs to be a uuid')
-        ,
-    check('images','Images error')
-        .exists()
-        .withMessage('You need to provide images field'),   
+        .withMessage('invlaid id, needs to be a uuid'), 
         (req, res, next) => {
             validateResult(req, res, next);
         } 
@@ -99,13 +95,13 @@ const validatorGetAllProducts=[
         .if(query('min').exists())
         .notEmpty()
         .withMessage('Min can not be empty')
-        .isInt()
+        .isNumeric()
         .withMessage('Min its a numeric value'),
     query('max')
         .if(query('max').exists())
         .notEmpty()
         .withMessage('Max can not be empty')
-        .isInt()
+        .isNumeric()
         .withMessage('Max its a numeric value'),
     query('seller')
         .if(query('seller').exists())

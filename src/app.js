@@ -40,6 +40,10 @@ app.use(usersRoutes)
 app.use(productRoutes)
 app.use(cartsRoutes)
 app.use(orderRoutes)
+app.get('/',(req,res)=>{
+    res.send('healthy')
+   
+})
 
 errorHandlerRouter(app);
 app.listen(PORT,()=>{

@@ -44,6 +44,9 @@ class cartServices {
     static async getPriceOfProductInCart(id) {
         try {
             const product = await productsInCarts.findByPk(id)
+            if (!product) {
+                throw new Error('No se encontro ningun producto en el carrito con este id, tiene que ser un id de relacion.')
+            }
             return product.price
         } catch (error) {
             throw error

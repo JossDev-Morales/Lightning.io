@@ -7,7 +7,7 @@ const newProduct=async (req,res,next)=>{
         const {name,description,price,availableQty}=req.body
         const {id}=req.user
         const theProduct = await productServices.newProduct({id:v4(),userId:id,name,description,price,availableQty})
-        res.status(201).json(theProduct)
+        res.status(201).json({id:theProduct.id})
     } catch (error) {
         next(error)
     }
@@ -39,6 +39,12 @@ const getProduct=async (req,res,next)=>{
     try {
         const {id}=req.params
         const product=await productServices.getProductById(id)
+        if (!product) {
+            return next({
+                message:"this product dont exist",
+                name:"Product error"
+            })
+        }
         res.json(product)
     } catch (error) {
         throw error

@@ -10,14 +10,14 @@ const authentication=async (req,res,next)=>{
         const user=await userServices.getOneById(auth.id)
         if (!user) {
             return next({
-                status:403,
+                status:401,
                 message:'This user dont exist',
                 name:'Access denied'
             })
         }
         if (!user.verified) {
             return next({
-                status:403,
+                status:401,
                 message:'Verify your email before using the account',
                 name:'Access denied'
             })

@@ -54,7 +54,7 @@ const changePassword=async (req,res,next)=>{
 			return next({
 				status:401,
 				message:'Incorrect password',
-				name:'Auth error'
+				name:'Acces denied'
 			})
 		}
 		await userServices.update({password:newPassword},id)
@@ -72,7 +72,7 @@ const changeMail=async (req,res,next)=>{
 			return next({
 				status:401,
 				message:'Incorrect password',
-				name:'Auth error'
+				name:'Acces denied'
 			})
 		}
 		await userServices.update({mail:newMail,verified:false},id)
@@ -95,24 +95,16 @@ const changeUsername=async (req,res,next)=>{
 const deletePetition=async (req,res,next)=>{
 	try {
 		const {password}=req.body
-		if (!password) {
-			return next({
-				status:400,
-				message:'Provide a valid password',
-				name:'Auth error'
-			})
-		}
 		const {id}=req.user
 		const user=await userServices.getOneById(id)
 		if (!comparePassword(password,user.password)) {
 			return next({
 				status:401,
 				message:'Incorrect password',
-				name:'Auth error'
+				name:'acces denied'
 			})
 		}
 		const token=genToken({id,username:user.username,destroy:true})
-		console.log(token);
 		await mailer(user,token,'Confirm action',true)
 		res.status(204).send()
 	} catch (error) {
@@ -159,7 +151,7 @@ const deleteUser=async (req,res,next)=>{
 			}
 			return next({
 				status:401,
-				message:"You can't delete this user because it doesn't belong to you",
+				message:"You can't delete this user because it doesn't belong to you or you dont have permissions.",
 				name:'Auth error'
 			})
 		}

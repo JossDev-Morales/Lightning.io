@@ -14,10 +14,14 @@ const buyCart = async (req, res, next) => {
     try {
         
         const { id } = req.user
-        const type = req.query.type || 'data'
+        let type = req.query.type || 'data'
+        if (type!=='file'&&type!=='data') {
+            type='data'
+        }
         const cart = await cartServices.getCart(id)
         await cartServices.resetCart(cart.id)
-        req.QtyErrors = cart.products.filter(product => product.availableQty < product['products_in_carts'].quantity)
+        const productsAvailble=cart.products.filter(product=>product['products_in_carts'].available)
+        req.QtyErrors = productsAvailble.filter(product => product.availableQty < product['products_in_carts'].quantity)
         await cartServices.bulkAddToCart(req.QtyErrors.map(product=>{
             return {
                 id:product['products_in_carts'].id,
@@ -50,10 +54,14 @@ const buyCart = async (req, res, next) => {
         })
         await orderServices.bulkProductsInOrder(productsInOrder)
         const token = genToken({ payment: true, id, orderId: newOrder.id },60*60*24*30)
+        const user= await userServices.getOneById(id)
         console.log(token);
         if (type == 'file') {
             const filename = v4()
-            const format = req.query.format || 'png'
+            let format = req.query.format || 'png'
+            if (format!=='svg'&&format!=='png') {
+                format='png'
+            }
             await qr.toFile(`src/public/qrcodes/${filename}.${format}`, `http://localhost:3000/api/v1/payments?token=`+token, {
                 color: {
                     dark: '#399493'
@@ -108,6 +116,7 @@ const payOrder = async (req, res, next) => {
                 name:'Auth error'
             })
         }
+        const user=await userServices.getOneById(req.user.id)
         await orderServices.payOrder(orderId)
         for (const product of order.products) {
             await productServices.decrementQuantity(product['products_in_orders'].quantity,product.id)

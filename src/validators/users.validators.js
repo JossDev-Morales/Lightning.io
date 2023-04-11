@@ -16,10 +16,7 @@ const validaorUpAvatar=[
         .exists()
         .withMessage('You need to provide token header')
         .isJWT()
-        .withMessage('Token is a not a valid token'),
-    check('avatar','Avatar error')
-        .exists()
-        .withMessage('You need to provide Avatar field'),   
+        .withMessage('Token is a not a valid token'),   
         (req, res, next) => {
             validateResult(req, res, next);
         }
@@ -90,7 +87,7 @@ const validatorChangeName=[
         .withMessage('You need to provide token header')
         .isJWT()
         .withMessage('Token is a not a valid token'),
-    check('name','Name error')
+    check('username','Name error')
         .exists()
         .withMessage('You need to provide a name field')
         .notEmpty()
